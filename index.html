@@ -9,7 +9,7 @@
         .header { background-color: #2c3e50; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
         
-        /* Panel de Autorización */
+        /* Panel de Autorización (EL QUE TE FALTA VER) */
         .auth-panel { background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; border-top: 5px solid #27ae60; }
         .auth-panel h2 { margin-top: 0; color: #2c3e50; }
         .input-group { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
@@ -35,19 +35,17 @@
     </div>
 
     <div class="container">
-        <!-- SECCIÓN NUEVA: AUTORIZAR ESTUDIANTES -->
         <div class="auth-panel">
             <h2>➕ Autorizar Nuevo Estudiante</h2>
             <div class="input-group">
-                <input type="text" id="nuevo-nombre" placeholder="Nombre">
-                <input type="text" id="nuevo-ap1" placeholder="Primer Apellido">
-                <input type="text" id="nuevo-ap2" placeholder="Segundo Apellido">
+                <input type="text" id="nuevo-nombre" placeholder="Nombre (Ej: Kathleen Sofia)">
+                <input type="text" id="nuevo-ap1" placeholder="Primer Apellido (Ej: Salazar)">
+                <input type="text" id="nuevo-ap2" placeholder="Segundo Apellido (Ej: Ruiz)">
                 <button class="btn-add" onclick="autorizarEstudiante()">Autorizar</button>
             </div>
-            <p style="font-size: 12px; color: #7f8c8d;">* El sistema normalizará automáticamente el ID para evitar errores de escritura.</p>
+            <p style="font-size: 12px; color: #7f8c8d;">* Escribe los datos y presiona Autorizar. El sistema le dará acceso inmediatamente.</p>
         </div>
 
-        <!-- SECCIÓN: CALIFICACIONES -->
         <div class="controls">
             <input type="text" id="buscador" class="search-bar" placeholder="🔍 Buscar estudiante..." onkeyup="filtrarTabla()">
             <button class="btn-refresh" onclick="cargarDatos()">🔄 Actualizar Tabla</button>
@@ -73,7 +71,7 @@
     <script>
         const baseUrl = 'https://escuela-viento-fresco-default-rtdb.firebaseio.com';
         
-        // --- LÓGICA DE NORMALIZACIÓN (Debe coincidir con la del controlador) ---
+        // --- LÓGICA DE NORMALIZACIÓN ---
         function normalizarTexto(texto) {
             return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/z/g, "s").replace(/v/g, "b").replace(/ll/g, "y").trim();
         }
@@ -94,7 +92,7 @@
             });
 
             if(response.ok) {
-                alert(`¡Estudiante ${n} autorizado correctamente!`);
+                alert(`¡Estudiante ${n} ${a1} autorizado correctamente! Ya puede ingresar a la plataforma.`);
                 document.getElementById('nuevo-nombre').value = '';
                 document.getElementById('nuevo-ap1').value = '';
                 document.getElementById('nuevo-ap2').value = '';
